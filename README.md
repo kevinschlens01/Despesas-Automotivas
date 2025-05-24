@@ -51,4 +51,4 @@ O principal objetivo deste sistema é **registrar e consultar manutenções de v
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/kevinschlens01/DespesasAutomotivas.git
+   git clone https://github.com/kevinschlens01/Despesas-Automotivas.git

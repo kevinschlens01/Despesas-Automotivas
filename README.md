@@ -20,7 +20,7 @@ O sistema implementa operações básicas de **CRUD (Create, Read, Update, Delet
 
 ## 🗃️ Modelagem de Dados
 
-O sistema contém **3 tabelas principais** com relacionamento **muitos para muitos**:
+O sistema contém **3 tabelas** com relacionamento **muitos para muitos**:
 
 - Um **carro** pode realizar várias **manutenções** em diferentes **oficinas**.
 - Uma **oficina** pode realizar manutenções em vários **carros**.

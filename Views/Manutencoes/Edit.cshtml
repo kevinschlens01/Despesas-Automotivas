@@ -1,0 +1,123 @@
+﻿@model DespesasAutomotivas.Models.Manutencoes
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Editando - Manutenção</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="CarroId" class="form-label"></label>
+                        <select asp-for="CarroId" class="form-control" asp-items="ViewBag.CarroId"></select>
+                        <span asp-validation-for="CarroId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="OficinaId" class="form-label"></label>
+                        <select asp-for="OficinaId" class="form-control" asp-items="ViewBag.OficinaId"></select>
+                        <span asp-validation-for="OficinaId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="DataEntrada" class="form-label"></label>
+                        <input asp-for="DataEntrada" class="form-control" type="date" />
+                        <span asp-validation-for="DataEntrada" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="HoraEntrada" class="form-label"></label>
+                        <input asp-for="HoraEntrada" class="form-control" type="time" />
+                        <span asp-validation-for="HoraEntrada" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="DataSaida" class="form-label"></label>
+                        <input asp-for="DataSaida" class="form-control" type="date" />
+                        <span asp-validation-for="DataSaida" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="HoraSaida" class="form-label"></label>
+                        <input asp-for="HoraSaida" class="form-control" type="time" />
+                        <span asp-validation-for="HoraSaida" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="DescricaoServico" class="form-label"></label>
+                        <textarea asp-for="DescricaoServico" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="DescricaoServico" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="ServicosExecutados" class="form-label"></label>
+                        <textarea asp-for="ServicosExecutados" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="ServicosExecutados" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PecasSubstituidas" class="form-label"></label>
+                    <textarea asp-for="PecasSubstituidas" class="form-control" rows="2"></textarea>
+                    <span asp-validation-for="PecasSubstituidas" class="text-danger"></span>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="ValorTotalPecas" class="form-label"></label>
+                        <input asp-for="ValorTotalPecas" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="ValorTotalPecas" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="ValorTotalServicos" class="form-label"></label>
+                        <input asp-for="ValorTotalServicos" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="ValorTotalServicos" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Valor Total da Manutenção</label>
+                    <input id="valorTotalManutencao" class="form-control" type="text" readonly />
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function calcularTotal() {
+            const pecas = parseFloat(document.getElementById("ValorTotalPecas").value) || 0;
+            const servicos = parseFloat(document.getElementById("ValorTotalServicos").value) || 0;
+            const total = pecas + servicos;
+            document.getElementById("valorTotalManutencao").value = total.toFixed(2);
+        }
+
+        document.getElementById("ValorTotalPecas").addEventListener("input", calcularTotal);
+        document.getElementById("ValorTotalServicos").addEventListener("input", calcularTotal);
+
+        // Inicializa ao carregar
+        window.addEventListener("DOMContentLoaded", calcularTotal);
+    </script>
+}
+

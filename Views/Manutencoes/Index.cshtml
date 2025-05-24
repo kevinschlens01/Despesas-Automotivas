@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DespesasAutomotivas.Models.Manutencoes>
+
+@{
+    ViewData["Title"] = "Manutenções";
+    var totalGasto = Model.Sum(m => m.ValorTotal);
+}
+
+<h1>Listagem - Manutenções</h1>
+
+<div class="d-flex justify-content-end mb-3">
+    <a asp-action="Create" class="btn btn-success">Criar Nova</a>
+</div>
+
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Ações</th>
+            <th>Carro</th>
+            <th>Oficina</th>
+            <th>@Html.DisplayNameFor(model => model.First().DescricaoServico)</th>
+            <th>@Html.DisplayNameFor(model => model.First().DataSaida)</th>
+            <th>@Html.DisplayNameFor(model => model.First().ValorTotal)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-warning text-white">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Excluir</a>
+                </td>
+                <td>@($"{item.Carro?.Nome} - {item.Carro?.Modelo}")</td>
+                <td>@item.Oficina?.Nome</td>
+                <td>@item.DescricaoServico</td>
+                <td>@item.DataSaida?.ToString("dd/MM/yyyy")</td>
+                <td>@item.ValorTotal.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5" class="text-end"><strong>Total Gasto:</strong></td>
+            <td><strong>@totalGasto.ToString("C")</strong></td>
+        </tr>
+    </tfoot>
+</table>

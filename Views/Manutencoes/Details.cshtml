@@ -1,0 +1,57 @@
+﻿@model DespesasAutomotivas.Models.Manutencoes
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Detalhes - Manutenção</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Carro</dt>
+                <dd class="col-sm-9">@Model.Carro?.Modelo</dd>
+
+                <dt class="col-sm-3">Oficina</dt>
+                <dd class="col-sm-9">@Model.Oficina?.Nome</dd>
+
+                <dt class="col-sm-3">Descrição do Serviço</dt>
+                <dd class="col-sm-9">@Model.DescricaoServico</dd>
+
+                <dt class="col-sm-3">Serviços Executados</dt>
+                <dd class="col-sm-9">@Model.ServicosExecutados</dd>
+
+                <dt class="col-sm-3">Peças Substituídas</dt>
+                <dd class="col-sm-9">@Model.PecasSubstituidas</dd>
+
+                <dt class="col-sm-3">Valor Total de Peças</dt>
+                <dd class="col-sm-9">R$ @Model.ValorTotalPecas.ToString("F2")</dd>
+
+                <dt class="col-sm-3">Valor Total de Serviços</dt>
+                <dd class="col-sm-9">R$ @Model.ValorTotalServicos.ToString("F2")</dd>
+
+                <dt class="col-sm-3">Data de Entrada</dt>
+                <dd class="col-sm-9">@Model.DataEntrada.ToString("dd/MM/yyyy")</dd>
+
+                <dt class="col-sm-3">Hora de Entrada</dt>
+                <dd class="col-sm-9">@Model.HoraEntrada</dd>
+
+                <dt class="col-sm-3">Data de Saída</dt>
+                <dd class="col-sm-9">@Model.DataSaida?.ToString("dd/MM/yyyy")</dd>
+
+                <dt class="col-sm-3">Hora de Saída</dt>
+                <dd class="col-sm-9">@Model.HoraSaida</dd>
+            </dl>
+        </div>
+        <div class="card-footer d-flex justify-content-end gap-2">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
+                <i class="bi bi-pencil-square"></i> Editar
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left-circle"></i> Voltar
+            </a>
+        </div>
+    </div>
+</div>

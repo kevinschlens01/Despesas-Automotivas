@@ -1,0 +1,45 @@
+﻿@model DespesasAutomotivas.Models.Carro
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Detalhes - Carro</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Nome</dt>
+                <dd class="col-sm-9">@Model.Nome</dd>
+
+                <dt class="col-sm-3">Modelo</dt>
+                <dd class="col-sm-9">@Model.Modelo</dd>
+
+                <dt class="col-sm-3">Marca</dt>
+                <dd class="col-sm-9">@Model.Marca</dd>
+
+                <dt class="col-sm-3">Ano</dt>
+                <dd class="col-sm-9">@Model.Ano</dd>
+
+                <dt class="col-sm-3">Versão</dt>
+                <dd class="col-sm-9">@Model.Versao</dd>
+
+                <dt class="col-sm-3">Quilometragem</dt>
+                <dd class="col-sm-9">@Model.Quilometragem</dd>
+
+                <dt class="col-sm-3">Placa</dt>
+                <dd class="col-sm-9">@Model.Placa</dd>
+            </dl>
+        </div>
+        <div class="card-footer d-flex justify-content-end gap-2">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
+                <i class="bi bi-pencil-square"></i> Editar
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left-circle"></i> Voltar
+            </a>
+        </div>
+    </div>
+</div>

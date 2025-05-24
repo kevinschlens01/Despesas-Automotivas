@@ -1,0 +1,94 @@
+﻿@model RelatorioViewModel
+@{
+    ViewData["Title"] = "Relatórios";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-6">Relatórios de Manutenção</h1>
+        <p class="text-muted">Filtrado por carro</p>
+    </div>
+
+    <!-- Filtro de Carro -->
+    <div class="d-flex justify-content-center mt-4 mb-4">
+        <form id="filtroForm" method="get" action="/Relatorios" class="d-flex align-items-end gap-3">
+            <div class="form-group mb-0">
+                <label for="carroId" class="form-label">Selecione o carro:</label>
+                <select asp-for="CarroIdSelecionado" asp-items="Model.Carros" class="form-control" name="carroId" style="min-width: 220px;">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-0">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Cards de Indicadores -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Manutenções</h5>
+                    <p class="fs-4 text-primary">@Model.TotalManutencoes</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Custo Total</h5>
+                    <p class="fs-4 text-danger">
+                        @Model.CustoTotal.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-5 mb-3 text-center">Manutenções por Carro</h4>
+    <canvas id="graficoManutencoes" width="400" height="200"></canvas>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function atualizarGrafico() {
+            const selectedCarroId = document.querySelector('select[name="carroId"]').value;
+            const url = `/api/relatorios/grafico${selectedCarroId ? '?carroId=' + selectedCarroId : ''}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const ctx = document.getElementById('graficoManutencoes').getContext('2d');
+
+                    if (window.myChart) {
+                        window.myChart.destroy();
+                    }
+
+                    window.myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: 'Nº de Manutenções',
+                                data: data.valores,
+                                backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', atualizarGrafico);
+    </script>
+}

@@ -1,8 +1,53 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Início";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-5">Controle de Manutenções de Veículos</h1>
+        <p class="lead">Organize, registre e acompanhe todas as manutenções dos seus veículos de forma prática e eficiente.</p>
+    </div>
+
+    <div class="row text-center">
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <i class="bi bi-car-front fs-1 text-primary"></i>
+                    <h5 class="card-title mt-2">Cadastrar Veículo</h5>
+                    <p class="card-text">Adicione novos veículos à sua frota.</p>
+                    <a href="/Carros/Create" class="btn btn-outline-primary">Cadastrar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <i class="bi bi-tools fs-1 text-success"></i>
+                    <h5 class="card-title mt-2">Registrar Manutenção</h5>
+                    <p class="card-text">Registre serviços realizados e custos.</p>
+                    <a href="/Manutencoes/Create" class="btn btn-outline-success">Registrar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <i class="bi bi-clock-history fs-1 text-warning"></i>
+                    <h5 class="card-title mt-2">Histórico</h5>
+                    <p class="card-text">Consulte o histórico completo das manutenções.</p>
+                    <a href="/Manutencoes/Index" class="btn btn-outline-warning">Ver histórico</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <i class="bi bi-bar-chart-line fs-1 text-danger"></i>
+                    <h5 class="card-title mt-2">Relatórios</h5>
+                    <p class="card-text">Visualize gastos e relatórios personalizados.</p>
+                    <a href="/Relatorios/Index" class="btn btn-outline-danger">Relatórios</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

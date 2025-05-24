@@ -52,25 +52,4 @@ public class RelatoriosApiController : ControllerBase
             });
         }
     }
-
-    [HttpGet("cards")]
-    public async Task<IActionResult> GetCardsData(int? carroId)
-    {
-        var manutencoes = await _manutencaoRepository.GetAllAsync();
-        Console.WriteLine($"Total de manutencoes no banco: {manutencoes.Count()}");
-
-        var manutencoesAtivas = manutencoes.Where(m => !m.Excluido);
-
-        var manutencoesFiltradas = carroId.HasValue
-            ? manutencoesAtivas.Where(m => m.CarroId == carroId.Value)
-            : manutencoesAtivas;
-        Console.WriteLine($"carroId recebido: {carroId}");
-        var resultado = new
-        {
-            TotalManutencoes = manutencoesFiltradas.Count(),
-            CustoTotal = manutencoesFiltradas.Sum(m => m.ValorTotal)
-        };
-
-        return Ok(resultado);
-    }
 }

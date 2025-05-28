@@ -1,0 +1,64 @@
+﻿@model DespesasAutomotivas.Models.Melhoria
+
+@{
+    ViewData["Title"] = "Editar Melhoria";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Editando - Melhoria</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="NomePeca" class="form-label"></label>
+                        <input asp-for="NomePeca" class="form-control" />
+                        <span asp-validation-for="NomePeca" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="CarroId" class="form-label"></label>
+                        <select asp-for="CarroId" asp-items="ViewBag.CarroId" class="form-select"></select>
+                        <span asp-validation-for="CarroId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="DataAvaliacao" class="form-label"></label>
+                        <input asp-for="DataAvaliacao" class="form-control" type="date" />
+                        <span asp-validation-for="DataAvaliacao" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Prioridade" class="form-label"></label>
+                        <select asp-for="Prioridade" class="form-select" asp-items="Html.GetEnumSelectList<Prioridade>()"></select>
+                        <span asp-validation-for="Prioridade" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="Status" class="form-label"></label>
+                        <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<StatusMelhoria>()"></select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

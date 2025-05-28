@@ -4,6 +4,7 @@ using DespesasAutomotivas.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DespesasAutomotivas.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250527180950_adicionando tabela de melhorias")]
+    partial class adicionandotabelademelhorias
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,13 +168,18 @@ namespace DespesasAutomotivas.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("AdicionadoEm")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("adicionado_em");
+
                     b.Property<int>("CarroId")
                         .HasColumnType("int")
                         .HasColumnName("carro_id");
 
-                    b.Property<DateTime>("DataAvaliacao")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("data_avaliacao");
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("descricao");
 
                     b.Property<bool>("Excluido")
                         .HasColumnType("bit")
@@ -186,11 +194,17 @@ namespace DespesasAutomotivas.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome_peca");
 
+                    b.Property<string>("PeriodoAvaliado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("periodo_avaliado");
+
                     b.Property<int>("Prioridade")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("valor");
 
                     b.HasKey("Id");
 

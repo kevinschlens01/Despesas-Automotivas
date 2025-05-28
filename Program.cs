@@ -14,6 +14,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<ICarroRepository, CarroRepository>();
 builder.Services.AddScoped<IOficinaRepository, OficinaRepository>();
 builder.Services.AddScoped<IManutencaoRepository, ManutencaoRepository>();
+builder.Services.AddScoped<IMelhoriaRepository, MelhoriaRepository>();
+
 
 
 var app = builder.Build();

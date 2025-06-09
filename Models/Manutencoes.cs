@@ -64,6 +64,8 @@ public class Manutencoes
     [DataType(DataType.Currency)]
     public decimal ValorTotalServicos { get; set; }
 
+    public string NomeCarro => Carro?.Nome + '-' + Carro?.Modelo;
+
     [NotMapped]
     [DisplayName("Valor Total da Manutenção")]
     public decimal ValorTotal => ValorTotalPecas + ValorTotalServicos;
